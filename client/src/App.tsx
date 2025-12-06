@@ -27,9 +27,15 @@ function DashboardLayout() {
           <Switch>
             <Route path="/dashboard" component={StudentDashboard} />
             <Route path="/dashboard/subjects" component={SubjectsPage} />
-            <Route path="/dashboard/subjects/:subjectId" component={ChaptersPage} />
+            <Route
+              path="/dashboard/subjects/:subjectId"
+              component={ChaptersPage}
+            />
             <Route path="/dashboard/lesson/:lessonId" component={LessonPage} />
-            <Route path="/dashboard/achievements" component={AchievementsPage} />
+            <Route
+              path="/dashboard/achievements"
+              component={AchievementsPage}
+            />
             <Route path="/dashboard/profile" component={ProfilePage} />
           </Switch>
         </main>
@@ -41,7 +47,8 @@ function DashboardLayout() {
 function App() {
   const [location] = useLocation();
   // Hide default navbar on dashboard (it has its own in layout) and auth page
-  const shouldHideNavbar = location.startsWith("/dashboard") || location === "/auth";
+  const shouldHideNavbar =
+    location.startsWith("/dashboard") || location === "/auth";
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -49,15 +56,15 @@ function App() {
         <TooltipProvider>
           <div className="font-sans antialiased text-foreground bg-background">
             {!shouldHideNavbar && <Navbar />}
-            
+
             <Switch>
-                <Route path="/" component={LandingPage} />
-                <Route path="/auth" component={AuthPage} />
-                
-                {/* Dashboard Routes */}
-                <Route path="/dashboard*" component={DashboardLayout} />
-                
-                <Route component={NotFound} />
+              <Route path="/" component={LandingPage} />
+              <Route path="/auth" component={AuthPage} />
+
+              {/* Dashboard Routes */}
+              <Route path="/dashboard/*?" component={DashboardLayout} />
+
+              <Route component={NotFound} />
             </Switch>
           </div>
           <Toaster />
