@@ -1,5 +1,12 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -18,7 +25,7 @@ export default function LandingPage() {
       <section className="relative overflow-hidden pt-16 md:pt-24 lg:pt-32 pb-16">
         <div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-8 items-center">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -43,56 +50,74 @@ export default function LandingPage() {
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
-                <Button size="lg" variant="outline" className="h-12 px-8 text-base">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="h-12 px-8 text-base"
+                >
                   {t("hero.explore")}
                 </Button>
               </div>
               <div className="flex items-center gap-4 text-sm text-muted-foreground">
                 <div className="flex -space-x-2">
                   {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="h-8 w-8 rounded-full border-2 border-background bg-gray-200 overflow-hidden">
-                       <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i}`} alt="User" />
+                    <div
+                      key={i}
+                      className="h-8 w-8 rounded-full border-2 border-background bg-gray-200 overflow-hidden"
+                    >
+                      <img
+                        src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i}`}
+                        alt="User"
+                      />
                     </div>
                   ))}
                 </div>
                 <p>Trusted by 10,000+ students</p>
               </div>
             </motion.div>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               className="relative mx-auto w-full max-w-[600px] lg:max-w-none"
             >
-               <div className="relative aspect-video overflow-hidden rounded-2xl shadow-2xl border border-gray-100">
-                  <img 
-                    src={heroImage} 
-                    alt="Students learning" 
-                    className="object-cover w-full h-full"
-                  />
-                  
-                  {/* Floating UI Elements for depth */}
-                  <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-white/50 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
-                    <div className="flex items-center gap-3">
-                      <div className="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-                        <CheckCircle2 className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium text-gray-500">Daily Goal</p>
-                        <p className="text-lg font-bold text-gray-900">Completed!</p>
-                      </div>
-                    </div>
-                  </div>
+              <div className="relative aspect-video overflow-hidden rounded-2xl shadow-2xl border border-gray-100">
+                <img
+                  src={heroImage}
+                  alt="Students learning"
+                  className="object-cover w-full h-full"
+                />
 
-                  <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-white/50 max-w-[200px] animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-700">
-                    <p className="text-xs font-medium text-gray-500 mb-2">Math Progress</p>
-                    <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
-                      <div className="h-full bg-primary w-[85%] rounded-full"></div>
+                {/* Floating UI Elements for depth */}
+                <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-white/50 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
+                  <div className="flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                      <CheckCircle2 className="h-6 w-6" />
                     </div>
-                    <p className="text-right text-xs font-bold mt-1 text-primary">85%</p>
+                    <div>
+                      <p className="text-sm font-medium text-gray-500">
+                        Daily Goal
+                      </p>
+                      <p className="text-lg font-bold text-gray-900">
+                        Completed!
+                      </p>
+                    </div>
                   </div>
-               </div>
+                </div>
+
+                <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-white/50 max-w-[200px] animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-700">
+                  <p className="text-xs font-medium text-gray-500 mb-2">
+                    Math Progress
+                  </p>
+                  <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-full bg-primary w-[85%] rounded-full"></div>
+                  </div>
+                  <p className="text-right text-xs font-bold mt-1 text-primary">
+                    85%
+                  </p>
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>
@@ -109,7 +134,7 @@ export default function LandingPage() {
               {t("why.subtitle")}
             </h2>
           </div>
-          
+
           <div className="grid gap-8 md:grid-cols-3">
             <Card className="border-none shadow-lg">
               <CardHeader>
@@ -124,7 +149,7 @@ export default function LandingPage() {
                 </p>
               </CardContent>
             </Card>
-            
+
             <Card className="border-none shadow-lg">
               <CardHeader>
                 <div className="h-12 w-12 rounded-lg bg-orange-100 text-orange-600 flex items-center justify-center mb-4">
@@ -138,7 +163,7 @@ export default function LandingPage() {
                 </p>
               </CardContent>
             </Card>
-            
+
             <Card className="border-none shadow-lg">
               <CardHeader>
                 <div className="h-12 w-12 rounded-lg bg-green-100 text-green-600 flex items-center justify-center mb-4">
@@ -155,7 +180,7 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-      
+
       {/* CTA Section */}
       <section className="py-24">
         <div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
@@ -164,18 +189,26 @@ export default function LandingPage() {
               <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl font-heading">
                 Ready to start your journey?
                 <br />
-                Join OODI today.
+                Join ODEE today.
               </h2>
               <p className="mt-6 text-lg leading-8 text-blue-100">
-                Join thousands of students mastering their Class 10 curriculum. It's free to get started.
+                Join thousands of students mastering their Class 10 curriculum.
+                It's free to get started.
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
                 <Link href="/auth">
-                  <Button size="lg" variant="secondary" className="h-12 px-8 text-primary font-bold">
+                  <Button
+                    size="lg"
+                    variant="secondary"
+                    className="h-12 px-8 text-primary font-bold"
+                  >
                     Get Started for Free
                   </Button>
                 </Link>
-                <a href="#" className="text-sm font-semibold leading-6 text-white">
+                <a
+                  href="#"
+                  className="text-sm font-semibold leading-6 text-white"
+                >
                   Learn more <span aria-hidden="true">→</span>
                 </a>
               </div>

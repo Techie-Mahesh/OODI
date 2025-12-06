@@ -23,7 +23,7 @@ const translations: Record<Language, Record<string, string>> = {
       "The smartest way to prepare for Class 10 (SSLC). Personalized daily tasks, adaptive quizzes, and real-time progress tracking.",
     "hero.cta": "Start Learning Now",
     "hero.explore": "Explore Syllabus",
-    "why.title": "Why OODI?",
+    "why.title": "Why ODEE?",
     "why.subtitle": "Everything you need to excel in SSLC",
     "feature.tasks": "Daily Smart Tasks",
     "feature.tasks.desc":
@@ -34,7 +34,7 @@ const translations: Record<Language, Record<string, string>> = {
     "feature.bilingual": "Kannada & English",
     "feature.bilingual.desc":
       "Switch languages instantly to understand complex concepts better.",
-    "auth.welcome": "Welcome to OODI",
+    "auth.welcome": "Welcome to ODEE",
     "auth.subtitle":
       "Enter your credentials to access your personalized learning path.",
     "auth.login": "Login",
@@ -82,7 +82,7 @@ const translations: Record<Language, Record<string, string>> = {
       "10ನೇ ತರಗತಿ (SSLC) ಗೆ ತಯಾರಿ ನಡೆಸಲು ಅತ್ಯುತ್ತಮ ಮಾರ್ಗ. ವೈಯಕ್ತೀಕರಿಸಿದ ದೈನಂದಿನ ಕಾರ್ಯಗಳು ಮತ್ತು ಪ್ರಗತಿ ಪರಿಶೀಲನೆ.",
     "hero.cta": "ಈಗಲೇ ಕಲಿಯಲು ಪ್ರಾರಂಭಿಸಿ",
     "hero.explore": "ಪಠ್ಯಕ್ರಮವನ್ನು ನೋಡಿ",
-    "why.title": "OODI ಏಕೆ?",
+    "why.title": "ODEE ಏಕೆ?",
     "why.subtitle": "SSLC ಯಲ್ಲಿ ಉತ್ತಮ ಅಂಕ ಗಳಿಸಲು ನಿಮಗೆ ಬೇಕಾದ ಎಲ್ಲವೂ ಇಲ್ಲಿದೆ",
     "feature.tasks": "ದೈನಂದಿನ ಸ್ಮಾರ್ಟ್ ಕಾರ್ಯಗಳು",
     "feature.tasks.desc":
@@ -93,7 +93,7 @@ const translations: Record<Language, Record<string, string>> = {
     "feature.bilingual": "ಕನ್ನಡ ಮತ್ತು ಇಂಗ್ಲಿಷ್",
     "feature.bilingual.desc":
       "ಕ್ಲಿಷ್ಟಕರವಾದ ವಿಷಯಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಲು ಭಾಷೆಯನ್ನು ಬದಲಾಯಿಸಿ ಕಲಿಯಿರಿ.",
-    "auth.welcome": "OODI ಗೆ ಸ್ವಾಗತ",
+    "auth.welcome": "ODEE ಗೆ ಸ್ವಾಗತ",
     "auth.subtitle": "ನಿಮ್ಮ ಕಲಿಕೆಯ ಹಾದಿಯನ್ನು ಪ್ರವೇಶಿಸಲು ಲಾಗಿನ್ ಮಾಡಿ.",
     "auth.login": "ಲಾಗಿನ್",
     "auth.signup": "ಸೈನ್ ಅಪ್",

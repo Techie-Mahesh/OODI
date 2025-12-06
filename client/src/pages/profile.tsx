@@ -1,18 +1,34 @@
 import { useLanguage } from "@/lib/language-context";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { MapPin, Mail, Phone, School, Award, BookOpen, Calendar } from "lucide-react";
+import {
+  MapPin,
+  Mail,
+  Phone,
+  School,
+  Award,
+  BookOpen,
+  Calendar,
+} from "lucide-react";
 
 export default function ProfilePage() {
   const { t } = useLanguage();
 
   return (
     <div className="space-y-8 p-4 md:p-8 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold tracking-tight font-heading">My Profile</h1>
+      <h1 className="text-3xl font-bold tracking-tight font-heading">
+        My Profile
+      </h1>
 
       <div className="grid gap-6 md:grid-cols-3">
         {/* Profile Card */}
@@ -20,7 +36,10 @@ export default function ProfilePage() {
           <CardContent className="pt-6 flex flex-col items-center text-center">
             <div className="relative mb-4">
               <Avatar className="h-24 w-24 border-4 border-primary/10">
-                <AvatarImage src="https://github.com/shadcn.png" alt="@student" />
+                <AvatarImage
+                  src="https://github.com/shadcn.png"
+                  alt="@student"
+                />
                 <AvatarFallback>ST</AvatarFallback>
               </Avatar>
               <Badge className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-orange-500 hover:bg-orange-600">
@@ -28,8 +47,10 @@ export default function ProfilePage() {
               </Badge>
             </div>
             <h2 className="text-xl font-bold">Arjun Kumar</h2>
-            <p className="text-sm text-muted-foreground">Student ID: OODI-2024-889</p>
-            
+            <p className="text-sm text-muted-foreground">
+              Student ID: ODEE-2024-889
+            </p>
+
             <div className="mt-6 w-full space-y-2 text-left text-sm">
               <div className="flex items-center gap-2 text-muted-foreground">
                 <School className="h-4 w-4" />
@@ -45,7 +66,9 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            <Button variant="outline" className="w-full mt-6">Edit Profile</Button>
+            <Button variant="outline" className="w-full mt-6">
+              Edit Profile
+            </Button>
           </CardContent>
         </Card>
 
@@ -54,7 +77,9 @@ export default function ProfilePage() {
           <Card>
             <CardHeader>
               <CardTitle>Academic Goals</CardTitle>
-              <CardDescription>Your target for the SSLC Examination</CardDescription>
+              <CardDescription>
+                Your target for the SSLC Examination
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between p-4 border rounded-lg bg-slate-50 dark:bg-slate-900">
@@ -64,10 +89,14 @@ export default function ProfilePage() {
                   </div>
                   <div>
                     <p className="font-medium">Target Score</p>
-                    <p className="text-sm text-muted-foreground">Distinction (85%+)</p>
+                    <p className="text-sm text-muted-foreground">
+                      Distinction (85%+)
+                    </p>
                   </div>
                 </div>
-                <Button variant="ghost" size="sm">Change</Button>
+                <Button variant="ghost" size="sm">
+                  Change
+                </Button>
               </div>
 
               <div className="flex items-center justify-between p-4 border rounded-lg bg-slate-50 dark:bg-slate-900">
@@ -80,7 +109,9 @@ export default function ProfilePage() {
                     <p className="text-sm text-muted-foreground">Mathematics</p>
                   </div>
                 </div>
-                <Button variant="ghost" size="sm">Change</Button>
+                <Button variant="ghost" size="sm">
+                  Change
+                </Button>
               </div>
             </CardContent>
           </Card>
@@ -106,7 +137,10 @@ export default function ProfilePage() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="school">School Name</Label>
-                <Input id="school" defaultValue="Government High School, Jayanagar" />
+                <Input
+                  id="school"
+                  defaultValue="Government High School, Jayanagar"
+                />
               </div>
               <div className="flex justify-end">
                 <Button>Save Changes</Button>

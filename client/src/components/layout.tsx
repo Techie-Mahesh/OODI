@@ -41,7 +41,7 @@ export function Navbar() {
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
                 <BookOpen className="h-5 w-5" />
               </div>
-              <span>OODI</span>
+              <span>ODEE</span>
             </a>
           </Link>
         </div>
