@@ -100,7 +100,7 @@ export default function LandingPage() {
         <div className="container px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-4 text-center mb-16">
             <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
-              Why VidhyaPath?
+              Why OODI?
             </div>
             <h2 className="text-3xl font-bold tracking-tighter md:text-4xl font-heading">
               Everything you need to excel
@@ -164,7 +164,7 @@ export default function LandingPage() {
               <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl font-heading">
                 Ready to start your journey?
                 <br />
-                Join VidhyaPath today.
+                Join OODI today.
               </h2>
               <p className="mt-6 text-lg leading-8 text-blue-100">
                 Join thousands of students mastering their Class 10 curriculum. It's free to get started.
