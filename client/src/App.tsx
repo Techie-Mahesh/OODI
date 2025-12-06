@@ -13,6 +13,8 @@ import StudentDashboard from "@/pages/dashboard";
 import SubjectsPage from "@/pages/subjects";
 import ChaptersPage from "@/pages/chapters";
 import LessonPage from "@/pages/lesson";
+import ProfilePage from "@/pages/profile";
+import AchievementsPage from "@/pages/achievements";
 import NotFound from "@/pages/not-found";
 
 function DashboardLayout() {
@@ -27,12 +29,8 @@ function DashboardLayout() {
             <Route path="/dashboard/subjects" component={SubjectsPage} />
             <Route path="/dashboard/subjects/:subjectId" component={ChaptersPage} />
             <Route path="/dashboard/lesson/:lessonId" component={LessonPage} />
-            <Route path="/dashboard/achievements">
-              <div className="p-8">Achievements Page (Coming Soon)</div>
-            </Route>
-            <Route path="/dashboard/profile">
-              <div className="p-8">Profile Page (Coming Soon)</div>
-            </Route>
+            <Route path="/dashboard/achievements" component={AchievementsPage} />
+            <Route path="/dashboard/profile" component={ProfilePage} />
           </Switch>
         </main>
       </div>

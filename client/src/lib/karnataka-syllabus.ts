@@ -1,3 +1,4 @@
+
 export interface Chapter {
   id: string;
   title: { en: string; kn: string };
@@ -101,6 +102,55 @@ export const karnatakaSyllabus: Subject[] = [
         description: { en: "History of European nationalism", kn: "ಯುರೋಪಿಯನ್ ರಾಷ್ಟ್ರೀಯತೆಯ ಇತಿಹಾಸ" },
         lessons: [
           { id: "ss1-l1", title: { en: "French Revolution", kn: "ಫ್ರೆಂಚ್ ಕ್ರಾಂತಿ" }, type: 'text', duration: "20 min" },
+        ]
+      }
+    ]
+  },
+  {
+    id: "english",
+    title: { en: "English", kn: "ಇಂಗ್ಲಿಷ್" },
+    icon: "BookOpen",
+    color: "text-pink-600 bg-pink-100",
+    chapters: [
+      {
+        id: "e1",
+        title: { en: "A Hero", kn: "ಒಬ್ಬ ನಾಯಕ" },
+        description: { en: "Story by R.K. Narayan", kn: "ಆರ್.ಕೆ. ನಾರಾಯಣ್ ಅವರ ಕಥೆ" },
+        lessons: [
+          { id: "e1-l1", title: { en: "Summary", kn: "ಸಾರಾಂಶ" }, type: 'text', duration: "10 min" },
+          { id: "e1-l2", title: { en: "Question & Answers", kn: "ಪ್ರಶ್ನೆ ಮತ್ತು ಉತ್ತರಗಳು" }, type: 'quiz', duration: "15 min" },
+        ]
+      },
+      {
+        id: "e2",
+        title: { en: "Grandma Climbs a Tree", kn: "ಅಜ್ಜಿ ಮರ ಹತ್ತುತ್ತಾರೆ" },
+        description: { en: "Poem by Ruskin Bond", kn: "ರಸ್ಕಿನ್ ಬಾಂಡ್ ಅವರ ಕವಿತೆ" },
+        lessons: [
+          { id: "e2-l1", title: { en: "Poem Analysis", kn: "ಕವಿತೆಯ ವಿಶ್ಲೇಷಣೆ" }, type: 'video', duration: "12 min" },
+        ]
+      }
+    ]
+  },
+  {
+    id: "kannada",
+    title: { en: "Kannada", kn: "ಕನ್ನಡ" },
+    icon: "Feather",
+    color: "text-red-600 bg-red-100",
+    chapters: [
+      {
+        id: "k1",
+        title: { en: "Yuddha", kn: "ಯುದ್ಧ" },
+        description: { en: "Lessons on war and peace", kn: "ಯುದ್ಧ ಮತ್ತು ಶಾಂತಿಯ ಪಾಠಗಳು" },
+        lessons: [
+          { id: "k1-l1", title: { en: "Introduction", kn: "ಪರಿಚಯ" }, type: 'video', duration: "15 min" },
+        ]
+      },
+      {
+        id: "k2",
+        title: { en: "Shabari", kn: "ಶಬರಿ" },
+        description: { en: "Extract from Ramayana", kn: "ರಾಮಾಯಣದ ಭಾಗ" },
+        lessons: [
+          { id: "k2-l1", title: { en: "Story of Shabari", kn: "ಶಬರಿಯ ಕಥೆ" }, type: 'text', duration: "20 min" },
         ]
       }
     ]
