@@ -7,8 +7,11 @@ import { BookOpen, CheckCircle2, ArrowRight, Check } from "lucide-react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import heroImage from "@assets/generated_images/indian_students_studying_in_a_bright_modern_library.png";
+import { useLanguage } from "@/lib/language-context";
 
 export default function LandingPage() {
+  const { t } = useLanguage();
+
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
@@ -24,24 +27,24 @@ export default function LandingPage() {
               <div className="space-y-4">
                 <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-sm font-medium text-primary">
                   <span className="flex h-2 w-2 rounded-full bg-primary mr-2"></span>
-                  New: Class 10 Board Exam Prep
+                  {t("hero.new")}
                 </div>
                 <h1 className="text-4xl font-bold tracking-tight sm:text-5xl xl:text-6xl/none font-heading text-balance">
-                  Master Your Curriculum. <span className="text-primary">Achieve Your Goals.</span>
+                  {t("hero.title")}
                 </h1>
                 <p className="max-w-[600px] text-muted-foreground md:text-xl text-balance">
-                  The smartest way to prepare for Class 10. Personalized daily tasks, adaptive quizzes, and real-time progress tracking to help you score your best.
+                  {t("hero.subtitle")}
                 </p>
               </div>
               <div className="flex flex-col gap-3 min-[400px]:flex-row">
                 <Link href="/auth">
                   <Button size="lg" className="h-12 px-8 text-base">
-                    Start Learning Now
+                    {t("hero.cta")}
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
                 <Button size="lg" variant="outline" className="h-12 px-8 text-base">
-                  Explore Curriculum
+                  {t("hero.explore")}
                 </Button>
               </div>
               <div className="flex items-center gap-4 text-sm text-muted-foreground">
@@ -100,14 +103,11 @@ export default function LandingPage() {
         <div className="container px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-4 text-center mb-16">
             <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
-              Why OODI?
+              {t("why.title")}
             </div>
             <h2 className="text-3xl font-bold tracking-tighter md:text-4xl font-heading">
-              Everything you need to excel
+              {t("why.subtitle")}
             </h2>
-            <p className="max-w-[700px] text-muted-foreground md:text-lg">
-              Our platform adapts to your learning style and goals, whether you want to just pass or top the class.
-            </p>
           </div>
           
           <div className="grid gap-8 md:grid-cols-3">
@@ -116,11 +116,11 @@ export default function LandingPage() {
                 <div className="h-12 w-12 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center mb-4">
                   <Check className="h-6 w-6" />
                 </div>
-                <CardTitle>Daily Smart Tasks</CardTitle>
+                <CardTitle>{t("feature.tasks")}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Forget planning. We give you bite-sized tasks every day based on your syllabus and weak areas.
+                  {t("feature.tasks.desc")}
                 </p>
               </CardContent>
             </Card>
@@ -130,11 +130,11 @@ export default function LandingPage() {
                 <div className="h-12 w-12 rounded-lg bg-orange-100 text-orange-600 flex items-center justify-center mb-4">
                   <ArrowRight className="h-6 w-6" />
                 </div>
-                <CardTitle>Goal-Based Learning</CardTitle>
+                <CardTitle>{t("feature.goals")}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Choose your target: "Pass", "First Class", or "Distinction". We customize the difficulty for you.
+                  {t("feature.goals.desc")}
                 </p>
               </CardContent>
             </Card>
@@ -144,11 +144,11 @@ export default function LandingPage() {
                 <div className="h-12 w-12 rounded-lg bg-green-100 text-green-600 flex items-center justify-center mb-4">
                   <BookOpen className="h-6 w-6" />
                 </div>
-                <CardTitle>Bilingual Content</CardTitle>
+                <CardTitle>{t("feature.bilingual")}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Learn in English and Kannada. Switch languages instantly to understand complex concepts better.
+                  {t("feature.bilingual.desc")}
                 </p>
               </CardContent>
             </Card>

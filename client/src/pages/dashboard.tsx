@@ -16,6 +16,8 @@ import {
   Target
 } from "lucide-react";
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts";
+import { useLanguage } from "@/lib/language-context";
+import { Link } from "wouter";
 
 const data = [
   { name: "Mon", score: 80 },
@@ -28,15 +30,15 @@ const data = [
 ];
 
 export default function StudentDashboard() {
-  const [activeTab, setActiveTab] = useState("overview");
+  const { t } = useLanguage();
 
   return (
     <div className="space-y-8 p-4 md:p-8 max-w-7xl mx-auto">
       {/* Welcome Section */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight font-heading">Hello, Arjun! 👋</h1>
-          <p className="text-muted-foreground">You're on track to hit your "Distinction" goal. Keep it up!</p>
+          <h1 className="text-3xl font-bold tracking-tight font-heading">{t("dash.welcome")} 👋</h1>
+          <p className="text-muted-foreground">{t("dash.track")}</p>
         </div>
         <div className="flex items-center gap-3">
           <Card className="flex items-center gap-3 p-3 border-orange-100 bg-orange-50">
@@ -71,7 +73,7 @@ export default function StudentDashboard() {
             <CardHeader>
               <div className="flex justify-between items-start">
                 <div>
-                   <Badge variant="secondary" className="mb-2 bg-white/20 hover:bg-white/30 text-white border-none">Today's Focus</Badge>
+                   <Badge variant="secondary" className="mb-2 bg-white/20 hover:bg-white/30 text-white border-none">{t("dash.focus")}</Badge>
                    <CardTitle className="text-2xl font-heading">Quadratic Equations</CardTitle>
                    <CardDescription className="text-blue-100">Mathematics • Chapter 4</CardDescription>
                 </div>
@@ -95,9 +97,11 @@ export default function StudentDashboard() {
               </div>
             </CardContent>
             <CardFooter>
-              <Button variant="secondary" className="w-full text-primary font-bold shadow-lg hover:bg-white">
-                Continue Learning
-              </Button>
+              <Link href="/dashboard/lesson/m1-l1" className="w-full">
+                <Button variant="secondary" className="w-full text-primary font-bold shadow-lg hover:bg-white">
+                  {t("dash.continue")}
+                </Button>
+              </Link>
             </CardFooter>
           </Card>
 
@@ -105,7 +109,7 @@ export default function StudentDashboard() {
           <div>
             <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
               <CheckCircle2 className="h-5 w-5 text-primary" />
-              Smart Tasks for You
+              {t("dash.smartTasks")}
             </h3>
             <div className="grid gap-3">
               {[
@@ -141,7 +145,7 @@ export default function StudentDashboard() {
           {/* Weekly Performance Chart */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">Weekly Performance</CardTitle>
+              <CardTitle className="text-base">{t("dash.weekly")}</CardTitle>
               <CardDescription>Quiz scores over the last 7 days</CardDescription>
             </CardHeader>
             <CardContent>

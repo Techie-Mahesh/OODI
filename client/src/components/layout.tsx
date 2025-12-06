@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Menu, X, BookOpen, LayoutDashboard, Trophy, User, LogOut } from "lucide-react";
+import { Menu, X, BookOpen, LayoutDashboard, Trophy, User, LogOut, Languages } from "lucide-react";
 import { 
   Sheet, 
   SheetContent, 
@@ -16,10 +16,16 @@ import {
   DropdownMenuSeparator, 
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
+import { useLanguage } from "@/lib/language-context";
 
 export function Navbar() {
   const [location] = useLocation();
   const isDashboard = location.startsWith("/dashboard");
+  const { language, setLanguage, t } = useLanguage();
+
+  const toggleLanguage = () => {
+    setLanguage(language === 'en' ? 'kn' : 'en');
+  };
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md dark:bg-gray-950/80">
@@ -37,13 +43,24 @@ export function Navbar() {
 
         {!isDashboard && (
           <div className="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
-            <a href="#features" className="hover:text-foreground transition-colors">Features</a>
-            <a href="#curriculum" className="hover:text-foreground transition-colors">Curriculum</a>
-            <a href="#pricing" className="hover:text-foreground transition-colors">Pricing</a>
+            <a href="#features" className="hover:text-foreground transition-colors">{t("nav.features")}</a>
+            <a href="#curriculum" className="hover:text-foreground transition-colors">{t("nav.curriculum")}</a>
+            <a href="#pricing" className="hover:text-foreground transition-colors">{t("nav.pricing")}</a>
           </div>
         )}
 
         <div className="flex flex-1 items-center justify-end gap-4">
+          {/* Language Toggle */}
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={toggleLanguage}
+            className="hidden sm:flex gap-2"
+          >
+            <Languages className="h-4 w-4" />
+            {language === 'en' ? 'ಕನ್ನಡ' : 'English'}
+          </Button>
+
           {isDashboard ? (
             <div className="flex items-center gap-4">
                <div className="hidden md:flex items-center gap-2 text-sm font-medium text-orange-600 bg-orange-50 px-3 py-1 rounded-full border border-orange-100">
@@ -85,10 +102,10 @@ export function Navbar() {
           ) : (
             <div className="flex items-center gap-2">
               <Link href="/auth">
-                <Button variant="ghost" className="hidden sm:flex">Log In</Button>
+                <Button variant="ghost" className="hidden sm:flex">{t("nav.login")}</Button>
               </Link>
               <Link href="/auth">
-                <Button>Get Started</Button>
+                <Button>{t("nav.getStarted")}</Button>
               </Link>
             </div>
           )}
@@ -103,14 +120,20 @@ export function Navbar() {
             </SheetTrigger>
             <SheetContent side="right">
               <div className="grid gap-4 py-4">
+                <div className="flex items-center justify-between">
+                   <span className="text-sm font-medium">Language</span>
+                   <Button variant="outline" size="sm" onClick={toggleLanguage}>
+                     {language === 'en' ? 'ಕನ್ನಡ' : 'English'}
+                   </Button>
+                </div>
                 <Link href="/">
-                  <a className="text-lg font-medium hover:text-primary">Home</a>
+                  <a className="text-lg font-medium hover:text-primary">{t("nav.home")}</a>
                 </Link>
                 <Link href="/dashboard">
-                  <a className="text-lg font-medium hover:text-primary">Dashboard</a>
+                  <a className="text-lg font-medium hover:text-primary">{t("nav.dashboard")}</a>
                 </Link>
                 <Link href="/auth">
-                  <a className="text-lg font-medium hover:text-primary">Login</a>
+                  <a className="text-lg font-medium hover:text-primary">{t("nav.login")}</a>
                 </Link>
               </div>
             </SheetContent>
@@ -123,10 +146,11 @@ export function Navbar() {
 
 export function Sidebar() {
   const [location] = useLocation();
+  const { t } = useLanguage();
   
   const links = [
     { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
-    { href: "/dashboard/learn", label: "My Path", icon: BookOpen },
+    { href: "/dashboard/subjects", label: "My Subjects", icon: BookOpen },
     { href: "/dashboard/achievements", label: "Achievements", icon: Trophy },
     { href: "/dashboard/profile", label: "Profile", icon: User },
   ];
@@ -136,7 +160,7 @@ export function Sidebar() {
       <div className="flex flex-col gap-2 p-4">
         {links.map((link) => {
           const Icon = link.icon;
-          const isActive = location === link.href;
+          const isActive = location === link.href || (link.href !== "/dashboard" && location.startsWith(link.href));
           return (
             <Link key={link.href} href={link.href}>
               <a className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all hover:text-primary ${
@@ -156,11 +180,19 @@ export function Sidebar() {
             Your Subjects
           </h3>
           <div className="space-y-1">
-             {["Mathematics", "Science", "Social Science", "English", "Kannada"].map((sub) => (
-               <button key={sub} className="w-full text-left flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
-                 <span className="h-2 w-2 rounded-full bg-blue-400/50" />
-                 {sub}
-               </button>
+             {[
+               { id: "math", key: "sub.math" }, 
+               { id: "science", key: "sub.science" }, 
+               { id: "social", key: "sub.social" }, 
+               { id: "english", key: "sub.english" }, 
+               { id: "kannada", key: "sub.kannada" }
+             ].map((sub) => (
+               <Link key={sub.id} href={`/dashboard/subjects/${sub.id}`}>
+                 <button className="w-full text-left flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
+                   <span className="h-2 w-2 rounded-full bg-blue-400/50" />
+                   {t(sub.key)}
+                 </button>
+               </Link>
              ))}
           </div>
         </div>

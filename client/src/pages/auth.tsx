@@ -11,6 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { BookOpen, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/lib/language-context";
 
 // Simple schema for mockup
 const authSchema = z.object({
@@ -22,6 +23,7 @@ export default function AuthPage() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
+  const { t } = useLanguage();
 
   const form = useForm<z.infer<typeof authSchema>>({
     resolver: zodResolver(authSchema),
@@ -65,9 +67,9 @@ export default function AuthPage() {
           <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-white mb-4 shadow-lg shadow-primary/30">
             <BookOpen className="h-6 w-6" />
           </div>
-          <h1 className="text-3xl font-bold tracking-tight font-heading">Welcome to OODI</h1>
+          <h1 className="text-3xl font-bold tracking-tight font-heading">{t("auth.welcome")}</h1>
           <p className="text-muted-foreground text-balance">
-            Enter your credentials to access your personalized learning path.
+            {t("auth.subtitle")}
           </p>
         </div>
 
@@ -75,8 +77,8 @@ export default function AuthPage() {
           <CardHeader>
             <Tabs defaultValue="login" className="w-full">
               <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="login">Login</TabsTrigger>
-                <TabsTrigger value="signup">Sign Up</TabsTrigger>
+                <TabsTrigger value="login">{t("auth.login")}</TabsTrigger>
+                <TabsTrigger value="signup">{t("auth.signup")}</TabsTrigger>
               </TabsList>
               
               <TabsContent value="login">
@@ -88,7 +90,7 @@ export default function AuthPage() {
                         name="email"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Email</FormLabel>
+                            <FormLabel>{t("auth.email")}</FormLabel>
                             <FormControl>
                               <Input placeholder="student@example.com" {...field} />
                             </FormControl>
@@ -102,7 +104,7 @@ export default function AuthPage() {
                         render={({ field }) => (
                           <FormItem>
                             <div className="flex items-center justify-between">
-                              <FormLabel>Password</FormLabel>
+                              <FormLabel>{t("auth.password")}</FormLabel>
                               <a href="#" className="text-xs text-primary hover:underline">Forgot password?</a>
                             </div>
                             <FormControl>
@@ -119,7 +121,7 @@ export default function AuthPage() {
                             Logging in...
                           </>
                         ) : (
-                          "Login"
+                          t("auth.submit")
                         )}
                       </Button>
                     </form>
@@ -169,7 +171,7 @@ export default function AuthPage() {
                   />
                 </svg>
               )}
-              Google
+              {t("auth.google")}
             </Button>
           </CardFooter>
         </Card>

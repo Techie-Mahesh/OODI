@@ -4,11 +4,15 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navbar, Sidebar } from "@/components/layout";
+import { LanguageProvider } from "./lib/language-context";
 
 // Pages
 import LandingPage from "@/pages/landing";
 import AuthPage from "@/pages/auth";
 import StudentDashboard from "@/pages/dashboard";
+import SubjectsPage from "@/pages/subjects";
+import ChaptersPage from "@/pages/chapters";
+import LessonPage from "@/pages/lesson";
 import NotFound from "@/pages/not-found";
 
 function DashboardLayout() {
@@ -20,9 +24,9 @@ function DashboardLayout() {
         <main className="flex-1 overflow-x-hidden">
           <Switch>
             <Route path="/dashboard" component={StudentDashboard} />
-            <Route path="/dashboard/learn">
-              <div className="p-8">Learning Path Page (Coming Soon)</div>
-            </Route>
+            <Route path="/dashboard/subjects" component={SubjectsPage} />
+            <Route path="/dashboard/subjects/:subjectId" component={ChaptersPage} />
+            <Route path="/dashboard/lesson/:lessonId" component={LessonPage} />
             <Route path="/dashboard/achievements">
               <div className="p-8">Achievements Page (Coming Soon)</div>
             </Route>
@@ -43,22 +47,24 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <div className="font-sans antialiased text-foreground bg-background">
-           {!shouldHideNavbar && <Navbar />}
-           
-           <Switch>
-              <Route path="/" component={LandingPage} />
-              <Route path="/auth" component={AuthPage} />
-              
-              {/* Dashboard Routes */}
-              <Route path="/dashboard*" component={DashboardLayout} />
-              
-              <Route component={NotFound} />
-           </Switch>
-        </div>
-        <Toaster />
-      </TooltipProvider>
+      <LanguageProvider>
+        <TooltipProvider>
+          <div className="font-sans antialiased text-foreground bg-background">
+            {!shouldHideNavbar && <Navbar />}
+            
+            <Switch>
+                <Route path="/" component={LandingPage} />
+                <Route path="/auth" component={AuthPage} />
+                
+                {/* Dashboard Routes */}
+                <Route path="/dashboard*" component={DashboardLayout} />
+                
+                <Route component={NotFound} />
+            </Switch>
+          </div>
+          <Toaster />
+        </TooltipProvider>
+      </LanguageProvider>
     </QueryClientProvider>
   );
 }
