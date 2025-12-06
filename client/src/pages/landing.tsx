@@ -16,7 +16,7 @@ export default function LandingPage() {
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-16 md:pt-24 lg:pt-32 pb-16">
-        <div className="container px-4 md:px-6">
+        <div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-8 items-center">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -100,7 +100,7 @@ export default function LandingPage() {
 
       {/* Features Section */}
       <section className="py-24 bg-slate-50 dark:bg-slate-900/50" id="features">
-        <div className="container px-4 md:px-6">
+        <div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-center space-y-4 text-center mb-16">
             <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
               {t("why.title")}
@@ -158,7 +158,7 @@ export default function LandingPage() {
       
       {/* CTA Section */}
       <section className="py-24">
-        <div className="container px-4 md:px-6">
+        <div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative overflow-hidden rounded-3xl bg-primary px-6 py-16 shadow-2xl sm:px-16 md:pt-20 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
             <div className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-24 lg:text-left">
               <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl font-heading">

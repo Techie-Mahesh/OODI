@@ -6,18 +6,54 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { BookOpen, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/lib/language-context";
 
-// Simple schema for mockup
+// Login schema
 const authSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
-  password: z.string().min(6, { message: "Password must be at least 6 characters" }),
+  password: z
+    .string()
+    .min(6, { message: "Password must be at least 6 characters" }),
 });
+
+// Signup schema
+const signupSchema = z
+  .object({
+    name: z
+      .string()
+      .min(2, { message: "Please enter your full name" })
+      .max(80),
+    email: z.string().email({ message: "Please enter a valid email address" }),
+    password: z
+      .string()
+      .min(6, { message: "Password must be at least 6 characters" }),
+    confirmPassword: z
+      .string()
+      .min(6, { message: "Password must be at least 6 characters" }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    path: ["confirmPassword"],
+    message: "Passwords do not match",
+  });
 
 export default function AuthPage() {
   const [, setLocation] = useLocation();
@@ -25,6 +61,7 @@ export default function AuthPage() {
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useLanguage();
 
+  // Login form
   const form = useForm<z.infer<typeof authSchema>>({
     resolver: zodResolver(authSchema),
     defaultValues: {
@@ -33,28 +70,60 @@ export default function AuthPage() {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof authSchema>) {
+  // Signup form
+  const signupForm = useForm<z.infer<typeof signupSchema>>({
+    resolver: zodResolver(signupSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
+
+  async function onLoginSubmit(values: z.infer<typeof authSchema>) {
     setIsLoading(true);
-    
-    // Simulate API call
+
+    // TODO: Replace with real login API
     setTimeout(() => {
       setIsLoading(false);
       toast({
-        title: "Welcome back!",
-        description: "Redirecting to your dashboard...",
+        title: t("auth.loginSuccessTitle") ?? "Welcome back!",
+        description:
+          t("auth.loginSuccessDescription") ??
+          "Redirecting to your dashboard...",
       });
+      setLocation("/dashboard");
+    }, 1500);
+  }
+
+  async function onSignupSubmit(values: z.infer<typeof signupSchema>) {
+    setIsLoading(true);
+
+    // TODO: Replace with real signup API
+    setTimeout(() => {
+      setIsLoading(false);
+      toast({
+        title: t("auth.signupSuccessTitle") ?? "Account created",
+        description:
+          t("auth.signupSuccessDescription") ??
+          "You're all set! Redirecting to your dashboard...",
+      });
+      // You can change this to /onboarding if you have an onboarding flow
       setLocation("/dashboard");
     }, 1500);
   }
 
   const handleGoogleLogin = () => {
     setIsLoading(true);
-    // Simulate Google Login
+    // TODO: Replace with real Google OAuth flow
     setTimeout(() => {
       setIsLoading(false);
       toast({
-        title: "Welcome back!",
-        description: "Successfully logged in with Google",
+        title: t("auth.googleSuccessTitle") ?? "Welcome back!",
+        description:
+          t("auth.googleSuccessDescription") ??
+          "Successfully logged in with Google",
       });
       setLocation("/dashboard");
     }, 1500);
@@ -67,7 +136,9 @@ export default function AuthPage() {
           <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-white mb-4 shadow-lg shadow-primary/30">
             <BookOpen className="h-6 w-6" />
           </div>
-          <h1 className="text-3xl font-bold tracking-tight font-heading">{t("auth.welcome")}</h1>
+          <h1 className="text-3xl font-bold tracking-tight font-heading">
+            {t("auth.welcome")}
+          </h1>
           <p className="text-muted-foreground text-balance">
             {t("auth.subtitle")}
           </p>
@@ -80,11 +151,15 @@ export default function AuthPage() {
                 <TabsTrigger value="login">{t("auth.login")}</TabsTrigger>
                 <TabsTrigger value="signup">{t("auth.signup")}</TabsTrigger>
               </TabsList>
-              
+
+              {/* LOGIN TAB */}
               <TabsContent value="login">
                 <div className="mt-4">
                   <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                    <form
+                      onSubmit={form.handleSubmit(onLoginSubmit)}
+                      className="space-y-4"
+                    >
                       <FormField
                         control={form.control}
                         name="email"
@@ -92,7 +167,11 @@ export default function AuthPage() {
                           <FormItem>
                             <FormLabel>{t("auth.email")}</FormLabel>
                             <FormControl>
-                              <Input placeholder="student@example.com" {...field} />
+                              <Input
+                                placeholder="student@example.com"
+                                autoComplete="email"
+                                {...field}
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -105,20 +184,34 @@ export default function AuthPage() {
                           <FormItem>
                             <div className="flex items-center justify-between">
                               <FormLabel>{t("auth.password")}</FormLabel>
-                              <a href="#" className="text-xs text-primary hover:underline">Forgot password?</a>
+                              <a
+                                href="#"
+                                className="text-xs text-primary hover:underline"
+                              >
+                                {t("auth.forgotPassword") ?? "Forgot password?"}
+                              </a>
                             </div>
                             <FormControl>
-                              <Input type="password" placeholder="••••••••" {...field} />
+                              <Input
+                                type="password"
+                                placeholder="••••••••"
+                                autoComplete="current-password"
+                                {...field}
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
                         )}
                       />
-                      <Button type="submit" className="w-full h-11" disabled={isLoading}>
+                      <Button
+                        type="submit"
+                        className="w-full h-11"
+                        disabled={isLoading}
+                      >
                         {isLoading ? (
                           <>
                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                            Logging in...
+                            {t("auth.loggingIn") ?? "Logging in..."}
                           </>
                         ) : (
                           t("auth.submit")
@@ -128,27 +221,141 @@ export default function AuthPage() {
                   </Form>
                 </div>
               </TabsContent>
-              
+
+              {/* SIGNUP TAB */}
               <TabsContent value="signup">
-                <div className="py-4 text-center text-sm text-muted-foreground">
-                  <p>Registration is currently invite-only for the beta program.</p>
-                  <Button variant="outline" className="mt-4 w-full" onClick={() => setLocation("/")}>
-                    Back to Home
-                  </Button>
+                <div className="mt-4">
+                  <Form {...signupForm}>
+                    <form
+                      onSubmit={signupForm.handleSubmit(onSignupSubmit)}
+                      className="space-y-4"
+                    >
+                      <FormField
+                        control={signupForm.control}
+                        name="name"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>
+                              {t("auth.fullName") ?? "Full name"}
+                            </FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder={
+                                  t("auth.fullNamePlaceholder") ??
+                                  "e.g. Mahesh Kumar"
+                                }
+                                autoComplete="name"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={signupForm.control}
+                        name="email"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>{t("auth.email")}</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="student@example.com"
+                                autoComplete="email"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={signupForm.control}
+                        name="password"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>{t("auth.password")}</FormLabel>
+                            <FormControl>
+                              <Input
+                                type="password"
+                                placeholder="Create a strong password"
+                                autoComplete="new-password"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={signupForm.control}
+                        name="confirmPassword"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>
+                              {t("auth.confirmPassword") ??
+                                "Confirm password"}
+                            </FormLabel>
+                            <FormControl>
+                              <Input
+                                type="password"
+                                placeholder="Repeat your password"
+                                autoComplete="new-password"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <Button
+                        type="submit"
+                        className="w-full h-11"
+                        disabled={isLoading}
+                      >
+                        {isLoading ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            {t("auth.creatingAccount") ??
+                              "Creating your account..."}
+                          </>
+                        ) : (
+                          t("auth.signup")
+                        )}
+                      </Button>
+
+                      <p className="text-xs text-muted-foreground text-center">
+                        {t("auth.agreementText") ??
+                          "By signing up, you agree to our Terms of Use and Privacy Policy."}
+                      </p>
+                    </form>
+                  </Form>
                 </div>
               </TabsContent>
             </Tabs>
           </CardHeader>
+
           <CardFooter className="flex flex-col gap-4 border-t bg-gray-50/50 p-6">
             <div className="relative w-full">
               <div className="absolute inset-0 flex items-center">
                 <span className="w-full border-t" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-gray-50 px-2 text-muted-foreground">Or continue with</span>
+                <span className="bg-gray-50 px-2 text-muted-foreground">
+                  {t("auth.orContinueWith") ?? "Or continue with"}
+                </span>
               </div>
             </div>
-            <Button variant="outline" className="w-full" onClick={handleGoogleLogin} disabled={isLoading}>
+            <Button
+              variant="outline"
+              className="w-full"
+              onClick={handleGoogleLogin}
+              disabled={isLoading}
+            >
               {isLoading ? (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               ) : (
